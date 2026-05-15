@@ -79,14 +79,14 @@ exports.login = async (data) => {
     }
   
     // ❌ COMPANY INACTIVE
-    if (user.companyId) {
-      const Company = require("../models/Company");
-      const company = await Company.findById(user.companyId);
+    // if (user.companyId) {
+    //   const Company = require("../models/Company");
+    //   const company = await Company.findById(user.companyId);
   
-      if (!company || !company.status) {
-        throw new Error("Company is inactive");
-      }
-    }
+    //   if (!company || !company.status) {
+    //     throw new Error("Company is inactive");
+    //   }
+    // }
   
     const bcrypt = require("bcryptjs");
     const isMatch = await bcrypt.compare(password, user.password);
