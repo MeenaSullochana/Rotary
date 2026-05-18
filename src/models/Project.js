@@ -8,10 +8,34 @@ const projectSchema = new mongoose.Schema({
     },
 
     description: String,
+  longDescription: String,
 
-    images: [{
-        type: String
-    }],
+    contactPerson: {
+        type: String,
+        default: null
+    },
+
+    contactNumber: {
+        type: String,
+        default: null
+    },
+  images: [
+        {
+            image: {
+                type: String
+            },
+
+            caption: {
+                type: String,
+                default: ""
+            },
+
+            uploadedAt: {
+                type: Date,
+                default: Date.now
+            }
+        }
+    ],
 
     type: {
         type: String,
@@ -55,7 +79,7 @@ const projectSchema = new mongoose.Schema({
 
     status: {
         type: String,
-        enum: ["draft", "active", "completed"],
+        enum: ["draft", "active", "completed","inactive"],
         default: "active"
     },
 
