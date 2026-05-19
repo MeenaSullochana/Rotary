@@ -20,6 +20,12 @@ const storage = multer.diskStorage({
        if (req.originalUrl.includes("gallery")) {
             folder = "uploads/gallery";
         }
+        if (req.originalUrl.includes("siteSetting")) {
+            folder = "uploads/siteSetting";
+        }
+           if (req.originalUrl.includes("blog")) {
+            folder = "uploads/blog";
+        }
         // Profiles
         if (req.originalUrl.includes("profile")) {
             folder = "uploads/profiles";

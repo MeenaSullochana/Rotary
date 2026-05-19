@@ -30,6 +30,10 @@ app.use("/api/registration", require("./routes/registerRoutes"));
 app.use("/api/sliders", require("./routes/sliderRoutes"));
 app.use("/api/gallery", require("./routes/galleryRoutes"));
 app.use("/api/faq", require("./routes/faqRoutes"));
+app.use("/api/siteSetting", require("./routes/siteSettingRoutes"));
+app.use("/api/blog", require("./routes/blogRoutes"));
+
+
 
 
 
