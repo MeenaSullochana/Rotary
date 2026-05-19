@@ -28,6 +28,8 @@ app.use("/api/dashboard", require("./routes/dashboardRoutes"));
 app.use("/api/projects", require("./routes/projectRoutes"));
 app.use("/api/registration", require("./routes/registerRoutes"));
 app.use("/api/sliders", require("./routes/sliderRoutes"));
+app.use("/api/gallery", require("./routes/galleryRoutes"));
+app.use("/api/faq", require("./routes/faqRoutes"));
 
 
 

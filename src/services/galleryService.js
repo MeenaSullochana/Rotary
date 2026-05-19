@@ -3,81 +3,83 @@
 const Gallery = require("../models/Gallery");
 
 
-// Create
+// Create Gallery
 exports.createGallery = async (
     body,
     userId
 ) => {
 
     return await Gallery.create({
+
         ...body,
+
         createdBy: userId
+
     });
 
 };
 
 
-// List
-exports.getGallery = async () => {
+// Update Gallery
+exports.updateGallery = async (
+    id,
+    body
+) => {
 
-    return await Gallery.find({
-        status: "active"
-    })
-    .sort({ createdAt: -1 });
+    return await Gallery.findByIdAndUpdate(
+
+        id,
+
+        body,
+
+        {
+            new: true
+        }
+
+    );
 
 };
 
 
-// View
-exports.getGalleryById = async (id) => {
+// Gallery List
+exports.getGallery = async () => {
+
+    return await Gallery.find()
+        .sort({ order: 1 });
+
+};
+
+
+// Single Gallery View
+exports.getGalleryById = async (
+    id
+) => {
 
     return await Gallery.findById(id);
 
 };
 
 
-// Delete Image
-exports.deleteGalleryImage = async (
-    galleryId,
-    imageId
+// Delete Gallery
+exports.deleteGallery = async (
+    id
 ) => {
 
-    return await Gallery.findByIdAndUpdate(
-
-        galleryId,
-
-        {
-            $pull: {
-                images: {
-                    _id: imageId
-                }
-            }
-        },
-
-        {
-            new: true
-        }
-
+    return await Gallery.findByIdAndDelete(
+        id
     );
 
 };
 
 
-// Delete Gallery
-exports.deleteGallery = async (id) => {
+// Website Gallery
+exports.getGalleryWeb = async () => {
 
-    return await Gallery.findByIdAndUpdate(
+    return await Gallery.find({
 
-        id,
+        status: "active"
 
-        {
-            status: "inactive"
-        },
-
-        {
-            new: true
-        }
-
-    );
+    })
+    .sort({ order: 1 });
 
 };

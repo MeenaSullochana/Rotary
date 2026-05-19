@@ -1,27 +1,17 @@
-// models/Gallery.js
+// models/Faq.js
 
 const mongoose = require("mongoose");
 
-const gallerySchema = new mongoose.Schema({
+const faqSchema = new mongoose.Schema({
 
-    title: {
+    question: {
         type: String,
         required: true
     },
 
-    subTitle: {
-        type: String,
-        default: null
-    },
-
-    image: {
+    answer: {
         type: String,
         required: true
-    },
-
-    buttonLink: {
-        type: String,
-        default: null
     },
 
     order: {
@@ -44,6 +34,6 @@ const gallerySchema = new mongoose.Schema({
 }, { timestamps: true });
 
 module.exports = mongoose.model(
-    "Gallery",
-    gallerySchema
+    "Faq",
+    faqSchema
 );

@@ -1,32 +1,22 @@
-// controllers/galleryController.js
+// controllers/faqController.js
 
-const galleryService = require(
-    "../services/galleryService"
+const faqService = require(
+    "../services/faqService"
 );
 
 
-// Create Gallery
-exports.createGallery = async (
+// Create FAQ
+exports.createFaq = async (
     req,
     res
 ) => {
 
     try {
 
-        const body = {
-
-            ...req.body,
-
-            image: req.file
-                ? req.file.path
-                : null
-
-        };
-
         const data =
-            await galleryService.createGallery(
+            await faqService.createFaq(
 
-                body,
+                req.body,
 
                 req.user?._id || null
 
@@ -37,7 +27,7 @@ exports.createGallery = async (
             status: true,
 
             message:
-                "Gallery created successfully",
+                "FAQ created successfully",
 
             data
 
@@ -58,30 +48,20 @@ exports.createGallery = async (
 };
 
 
-// Update Gallery
-exports.updateGallery = async (
+// Update FAQ
+exports.updateFaq = async (
     req,
     res
 ) => {
 
     try {
 
-        const body = {
-            ...req.body
-        };
-
-        if (req.file) {
-
-            body.image = req.file.path;
-
-        }
-
         const data =
-            await galleryService.updateGallery(
+            await faqService.updateFaq(
 
                 req.params.id,
 
-                body
+                req.body
 
             );
 
@@ -90,7 +70,7 @@ exports.updateGallery = async (
             status: true,
 
             message:
-                "Gallery updated successfully",
+                "FAQ updated successfully",
 
             data
 
@@ -111,8 +91,8 @@ exports.updateGallery = async (
 };
 
 
-// Gallery List
-exports.getGallery = async (
+// FAQ List
+exports.getFaqs = async (
     req,
     res
 ) => {
@@ -120,7 +100,7 @@ exports.getGallery = async (
     try {
 
         const data =
-            await galleryService.getGallery();
+            await faqService.getFaqs();
 
         return res.status(200).json({
 
@@ -145,8 +125,8 @@ exports.getGallery = async (
 };
 
 
-// Single Gallery View
-exports.getGalleryById = async (
+// Single FAQ View
+exports.getFaqById = async (
     req,
     res
 ) => {
@@ -154,7 +134,7 @@ exports.getGalleryById = async (
     try {
 
         const data =
-            await galleryService.getGalleryById(
+            await faqService.getFaqById(
                 req.params.id
             );
 
@@ -181,8 +161,8 @@ exports.getGalleryById = async (
 };
 
 
-// Delete Gallery
-exports.deleteGallery = async (
+// Delete FAQ
+exports.deleteFaq = async (
     req,
     res
 ) => {
@@ -190,7 +170,7 @@ exports.deleteGallery = async (
     try {
 
         const data =
-            await galleryService.deleteGallery(
+            await faqService.deleteFaq(
                 req.params.id
             );
 
@@ -199,7 +179,7 @@ exports.deleteGallery = async (
             status: true,
 
             message:
-                "Gallery deleted successfully",
+                "FAQ deleted successfully",
 
             data
 
@@ -220,8 +200,8 @@ exports.deleteGallery = async (
 };
 
 
-// Website Gallery
-exports.getGalleryWeb = async (
+// Website FAQ
+exports.getFaqsWeb = async (
     req,
     res
 ) => {
@@ -229,7 +209,7 @@ exports.getGalleryWeb = async (
     try {
 
         const data =
-            await galleryService.getGalleryWeb();
+            await faqService.getFaqsWeb();
 
         return res.status(200).json({
 
