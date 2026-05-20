@@ -32,12 +32,7 @@ app.use("/api/gallery", require("./routes/galleryRoutes"));
 app.use("/api/faq", require("./routes/faqRoutes"));
 app.use("/api/siteSetting", require("./routes/siteSettingRoutes"));
 app.use("/api/blog", require("./routes/blogRoutes"));
-
-
-
-
-
-
+app.use("/api/enquiry", require("./routes/enquiryRoutes"));
 
 module.exports = app;
 
