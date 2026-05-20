@@ -23,7 +23,12 @@ exports.updateSiteSetting = async (
                 req.files.logo[0].path;
 
         }
+ if (req.files?.logo1?.[0]) {
 
+            body.logo1 =
+                req.files.logo1[0].path;
+
+        }
         if (req.files?.favicon?.[0]) {
 
             body.favicon =

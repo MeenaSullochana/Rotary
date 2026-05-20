@@ -41,6 +41,10 @@ router.post(
             name: "logo",
             maxCount: 1
         },
+           {
+            name: "logo1",
+            maxCount: 1
+        },
         {
             name: "favicon",
             maxCount: 1
