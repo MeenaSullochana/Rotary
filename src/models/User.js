@@ -28,7 +28,9 @@ const userSchema = new mongoose.Schema({
         required: true
     },
 
-     roles: [
+ 
+
+    roles: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Role"
@@ -55,8 +57,7 @@ const userSchema = new mongoose.Schema({
 
     employeeCode: {
         type: String,
-        unique: true,
-        sparse: true,
+
         default: null
     },
 
