@@ -27,7 +27,7 @@ exports.updateProfile = async (
         const data =
             await memberService.updateProfile(
 
-                req.user._id,
+                req.userId,
 
                 body,
 
@@ -74,7 +74,7 @@ exports.updateBusiness = async (
         const data =
             await memberService.updateBusiness(
 
-                req.user._id,
+                req.userId,
 
                 req.body,
 
@@ -121,7 +121,7 @@ exports.createFamily = async (
         const data =
             await memberService.createFamily(
 
-                req.user._id,
+                req.userId,
 
                 req.body,
 
@@ -168,7 +168,7 @@ exports.createSpecialDay = async (
         const data =
             await memberService.createSpecialDay(
 
-                req.user._id,
+                req.userId,
 
                 req.body,
 
