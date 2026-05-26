@@ -33,6 +33,8 @@ app.use("/api/faq", require("./routes/faqRoutes"));
 app.use("/api/siteSetting", require("./routes/siteSettingRoutes"));
 app.use("/api/blog", require("./routes/blogRoutes"));
 app.use("/api/enquiry", require("./routes/enquiryRoutes"));
+app.use("/api/member", require("./routes/memberRoutes"));
+app.use("/api/user", require("./routes/userRoutes"));
 
 module.exports = app;
 
