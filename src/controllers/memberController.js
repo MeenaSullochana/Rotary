@@ -202,3 +202,151 @@ exports.createSpecialDay = async (
     }
 
 };
+
+// Get Profile
+exports.getProfile = async (
+    req,
+    res
+) => {
+
+    try {
+
+        const data =
+            await memberService.getProfile(
+                req.params.id
+            );
+
+        return res.status(200).json({
+
+            status: true,
+
+            data
+
+        });
+
+    }
+
+    catch (err) {
+
+        return res.status(500).json({
+
+            status: false,
+
+            message: err.message
+
+        });
+
+    }
+
+};
+
+
+// Get Business
+exports.getBusiness = async (
+    req,
+    res
+) => {
+
+    try {
+
+        const data =
+            await memberService.getBusiness(
+req.params.id            );
+
+        return res.status(200).json({
+
+            status: true,
+
+            data
+
+        });
+
+    }
+
+    catch (err) {
+
+        return res.status(500).json({
+
+            status: false,
+
+            message: err.message
+
+        });
+
+    }
+
+};
+
+
+// Get Family
+exports.getFamily = async (
+    req,
+    res
+) => {
+
+    try {
+
+        const data =
+            await memberService.getFamily(
+req.params.id            );
+
+        return res.status(200).json({
+
+            status: true,
+
+            data
+
+        });
+
+    }
+
+    catch (err) {
+
+        return res.status(500).json({
+
+            status: false,
+
+            message: err.message
+
+        });
+
+    }
+
+};
+
+
+// Get Special Days
+exports.getSpecialDays = async (
+    req,
+    res
+) => {
+
+    try {
+
+        const data =
+            await memberService.getSpecialDays(
+req.params.id            );
+
+        return res.status(200).json({
+
+            status: true,
+
+            data
+
+        });
+
+    }
+
+    catch (err) {
+
+        return res.status(500).json({
+
+            status: false,
+
+            message: err.message
+
+        });
+
+    }
+
+};

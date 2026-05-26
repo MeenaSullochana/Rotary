@@ -161,3 +161,51 @@ exports.createSpecialDay = async (
     });
 
 };
+
+// Get Profile
+exports.getProfile = async (
+    userId
+) => {
+
+    return await MemberProfile.findOne({
+        userId
+    });
+
+};
+
+
+// Get Business
+exports.getBusiness = async (
+    userId
+) => {
+
+    return await MemberBusiness.findOne({
+        userId
+    });
+
+};
+
+
+// Get Family
+exports.getFamily = async (
+    userId
+) => {
+
+    return await FamilyDetail.find({
+        userId
+    });
+
+};
+
+
+// Get Special Days
+exports.getSpecialDays = async (
+    userId
+) => {
+
+    return await SpecialDay.find({
+        userId
+    });
+
+};
+

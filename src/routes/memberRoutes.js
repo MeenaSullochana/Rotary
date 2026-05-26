@@ -96,4 +96,76 @@ router.post(
 
 );
 
+
+// Get Profile
+router.get(
+
+    "/profile/:id",
+
+    auth,
+
+    checkStatus,
+
+    checkPermission(
+        "view_member_profile"
+    ),
+
+    memberController.getProfile
+
+);
+
+
+// Get Business
+router.get(
+
+    "/business/:id",
+
+    auth,
+
+    checkStatus,
+
+    checkPermission(
+        "view_member_business"
+    ),
+
+    memberController.getBusiness
+
+);
+
+
+// Get Family
+router.get(
+
+    "/family/:id",
+
+    auth,
+
+    checkStatus,
+
+    checkPermission(
+        "view_family_detail"
+    ),
+
+    memberController.getFamily
+
+);
+
+
+// Get Special Days
+router.get(
+
+    "/special-days/:id",
+
+    auth,
+
+    checkStatus,
+
+    checkPermission(
+        "view_special_day"
+    ),
+
+    memberController.getSpecialDays
+
+);
+
 module.exports = router;
