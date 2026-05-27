@@ -118,149 +118,63 @@ exports.updateUser = async (
 
 };
 
+//ownupdateuser
+exports.updateOwnUser = async (
+    req,
+    res
+) => {
 
-// User List
-// exports.getUsers = async (
-//     req,
-//     res
-// ) => {
+    try {
 
-//     try {
+        const body = {
+            ...req.body
+        };
 
-//         const data =
-//             await userService.getUsers( req.user._id
-// );
+        if (req.file) {
 
-//         return res.status(200).json({
+            body.profileImage =
+                req.file.path;
 
-//             status: true,
+        }
 
-//             data
+        const data =
+            await userService.updateOwnUser(
 
-//         });
+                req.user._id,
 
-//     }
+                body,
 
-//     catch (err) {
+                req.user?._id || null
 
-//         return res.status(500).json({
+            );
 
-//             status: false,
+        return res.status(200).json({
 
-//             message: err.message
+            status: true,
 
-//         });
+            message:
+                "User updated successfully",
 
-//     }
+            data
 
-// };
+        });
 
-// exports.getUsers = async (
-//     req,
-//     res
-// ) => {
+    }
 
-//     try {
+    catch (err) {
 
-//         const permissions =
-//             req.user.permissions || [];
+        return res.status(500).json({
 
-//         let filter = {};
-      
+            status: false,
 
+            message: err.message
 
-//         // ALL USERS
-//         if (
-//             permissions.includes(
-//                 "all_user"
-//             )
-//         ) {
+        });
 
-//             filter = {};
+    }
 
-//         }
+};
 
-
-
-//         // MY USERS
-//         else if (
-//             permissions.includes(
-//                 "my_user"
-//             )
-//         ) {
-
-//             filter = {
-
-//                 createdBy:
-//                     req.user._id
-
-//             };
-
-//         }
-
-
-
-//         // OWN PROFILE
-//         else if (
-//             permissions.includes(
-//                 "own_profile"
-//             )
-//         ) {
-
-//             filter = {
-
-//                 _id:
-//                     req.user._id
-
-//             };
-
-//         }
-
-
-
-//         else {
-
-//             return res.status(403).json({
-
-//                 status: false,
-
-//                 message:
-//                     "Permission denied"
-
-//             });
-
-//         }
-
-//         const data =
-//             await userService.getUsers(
-//                 filter
-//             );
-
-//         return res.status(200).json({
-
-//             status: true,
-
-//             data
-
-//         });
-
-//     }
-
-//     catch (err) {
-
-//         return res.status(500).json({
-
-//             status: false,
-
-//             message: err.message
-
-//         });
-
-//     }
-
-// };
-
-// controllers/userController.js
 
 
 
@@ -297,15 +211,6 @@ exports.getUsers = async (
 
 
 
-        // OWN PROFILE
-        const ownProfile =
-            req.user.roles.some(
-                role =>
-                    role.permissions.includes(
-                        "own_profile"
-                    )
-            );
-
 
 
         if (allUser) {
@@ -325,16 +230,7 @@ exports.getUsers = async (
 
         }
 
-        else if (ownProfile) {
-
-            filter = {
-
-                _id:
-                    req.user.id
-
-            };
-
-        }
+       
 
         else {
 
@@ -415,6 +311,41 @@ exports.getUserById = async (
 
 };
 
+//ownprofile
+exports.getOwnUser = async (
+    req,
+    res
+) => {
+
+    try {
+
+        const data =
+            await userService.getOwnUser(
+                    req.user.id            );
+
+        return res.status(200).json({
+
+            status: true,
+
+            data
+
+        });
+
+    }
+
+    catch (err) {
+
+        return res.status(500).json({
+
+            status: false,
+
+            message: err.message
+
+        });
+
+    }
+
+};
 
 // Delete User
 exports.deleteUser = async (

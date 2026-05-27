@@ -106,4 +106,36 @@ router.delete(
 
 );
 
+
+//ownprofile
+router.get(
+
+    "/myprofile",
+
+    auth,
+
+    checkStatus,
+
+    checkPermission("own_profile"),
+
+    userController.getOwnUser
+
+);
+// Update OwnUser
+router.put(
+
+    "/update",
+
+    auth,
+
+    checkStatus,
+
+    checkPermission("own_update_user"),
+
+    upload.single("profileImage"),
+
+    userController.updateOwnUser
+
+);
+
 module.exports = router;

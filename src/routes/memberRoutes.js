@@ -33,7 +33,7 @@ router.post(
     checkStatus,
 
     checkPermission(
-        "update_member_profile"
+        "update_member_profile","update_own_member_profile"
     ),
 
     upload.single("profileImage"),

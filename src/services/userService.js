@@ -67,23 +67,41 @@ exports.updateUser = async (
 
 };
 
+exports.updateOwnUser = async (
+    id,
+    body,
+    userId
+) => {
 
-// User List
-// exports.getUsers = async (loginUserId) => {
+    if (body.password) {
 
-//     return await User.find({
+        body.password =
+            await bcrypt.hash(
+                body.password,
+                10
+            );
 
-//         type: "member",
+    }
 
-//         createdBy: loginUserId
+    return await User.findByIdAndUpdate(
 
-//     })
-//         .populate(
-//             "roles"
-//         )
-//         .sort({ createdAt: -1 });
+        id,
 
-// };
+        {
+
+            ...body,
+
+            updatedBy: userId
+
+        },
+
+        {
+            new: true
+        }
+
+    );
+
+};
 
 exports.getUsers = async (
     filter
@@ -114,7 +132,17 @@ exports.getUserById = async (
 
 };
 
+exports.getOwnUser = async (
+    id
+) => {
 
+    return await User.findById(id)
+        .populate(
+            "roles",
+            "name"
+        );
+
+};
 // Delete User
 exports.deleteUser = async (
     id
