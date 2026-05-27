@@ -155,6 +155,115 @@ exports.updateUser = async (
 
 // };
 
+// exports.getUsers = async (
+//     req,
+//     res
+// ) => {
+
+//     try {
+
+//         const permissions =
+//             req.user.permissions || [];
+
+//         let filter = {};
+      
+
+
+//         // ALL USERS
+//         if (
+//             permissions.includes(
+//                 "all_user"
+//             )
+//         ) {
+
+//             filter = {};
+
+//         }
+
+
+
+//         // MY USERS
+//         else if (
+//             permissions.includes(
+//                 "my_user"
+//             )
+//         ) {
+
+//             filter = {
+
+//                 createdBy:
+//                     req.user._id
+
+//             };
+
+//         }
+
+
+
+//         // OWN PROFILE
+//         else if (
+//             permissions.includes(
+//                 "own_profile"
+//             )
+//         ) {
+
+//             filter = {
+
+//                 _id:
+//                     req.user._id
+
+//             };
+
+//         }
+
+
+
+//         else {
+
+//             return res.status(403).json({
+
+//                 status: false,
+
+//                 message:
+//                     "Permission denied"
+
+//             });
+
+//         }
+
+//         const data =
+//             await userService.getUsers(
+//                 filter
+//             );
+
+//         return res.status(200).json({
+
+//             status: true,
+
+//             data
+
+//         });
+
+//     }
+
+//     catch (err) {
+
+//         return res.status(500).json({
+
+//             status: false,
+
+//             message: err.message
+
+//         });
+
+//     }
+
+// };
+
+// controllers/userController.js
+
+
+
 exports.getUsers = async (
     req,
     res
@@ -162,61 +271,70 @@ exports.getUsers = async (
 
     try {
 
-        const permissions =
-            req.user.permissions || [];
-
         let filter = {};
 
 
 
         // ALL USERS
-        if (
-            permissions.includes(
-                "all_user"
-            )
-        ) {
+        const allUser =
+            req.user.roles.some(
+                role =>
+                    role.permissions.includes(
+                        "all_user"
+                    )
+            );
+
+
+
+        // MY USERS
+        const myUser =
+            req.user.roles.some(
+                role =>
+                    role.permissions.includes(
+                        "my_user"
+                    )
+            );
+
+
+
+        // OWN PROFILE
+        const ownProfile =
+            req.user.roles.some(
+                role =>
+                    role.permissions.includes(
+                        "own_profile"
+                    )
+            );
+
+
+
+        if (allUser) {
 
             filter = {};
 
         }
 
-
-
-        // MY USERS
-        else if (
-            permissions.includes(
-                "my_user"
-            )
-        ) {
+        else if (myUser) {
 
             filter = {
 
                 createdBy:
-                    req.user._id
+                    req.user.id
 
             };
 
         }
 
-
-
-        // OWN PROFILE
-        else if (
-            permissions.includes(
-                "own_profile"
-            )
-        ) {
+        else if (ownProfile) {
 
             filter = {
 
                 _id:
-                    req.user._id
+                    req.user.id
 
             };
 
         }
-
-
 
         else {
 
@@ -259,6 +377,7 @@ exports.getUsers = async (
     }
 
 };
+
 // Single User
 exports.getUserById = async (
     req,

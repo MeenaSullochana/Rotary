@@ -92,8 +92,8 @@ exports.getUsers = async (
     return await User.find(filter)
 
         .populate(
-            "roles",
-            "name"
+            "roles"
+          
         )
 
         .sort({
