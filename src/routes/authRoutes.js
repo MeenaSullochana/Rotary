@@ -16,5 +16,6 @@ router.put("/admin/:id", auth, checkPermission("profile_update"),controller.upda
 
 // LOGIN
 router.post("/login", loginValidation, controller.login);
+router.post("/member/login", loginValidation, controller.memberlogin);
 
 module.exports = router;

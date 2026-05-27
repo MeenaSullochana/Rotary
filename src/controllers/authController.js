@@ -75,3 +75,31 @@ exports.login = async (req, res) => {
     });
   }
 };
+
+// memberlogin
+exports.memberlogin = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      status: false,
+      errors: errors.array()
+    });
+  }
+
+  try {
+    const result = await authService.memberlogin(req.body);
+
+    res.status(200).json({
+      status: true,
+      message: "Login successful",
+      token: result.token,
+      user: result.user
+    });
+
+  } catch (err) {
+    res.status(400).json({
+      status: false,
+      message: err.message
+    });
+  }
+};
