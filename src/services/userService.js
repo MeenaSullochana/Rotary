@@ -69,23 +69,38 @@ exports.updateUser = async (
 
 
 // User List
-exports.getUsers = async (loginUserId) => {
+// exports.getUsers = async (loginUserId) => {
 
-    return await User.find({
+//     return await User.find({
 
-        type: "member",
+//         type: "member",
 
-        createdBy: loginUserId
+//         createdBy: loginUserId
 
-    })
+//     })
+//         .populate(
+//             "roles"
+//         )
+//         .sort({ createdAt: -1 });
+
+// };
+
+exports.getUsers = async (
+    filter
+) => {
+
+    return await User.find(filter)
+
         .populate(
-            "roles"
+            "roles",
+            "name"
         )
-        .sort({ createdAt: -1 });
+
+        .sort({
+            createdAt: -1
+        });
 
 };
-
-
 // Single User
 exports.getUserById = async (
     id

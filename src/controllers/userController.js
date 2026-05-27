@@ -120,6 +120,41 @@ exports.updateUser = async (
 
 
 // User List
+// exports.getUsers = async (
+//     req,
+//     res
+// ) => {
+
+//     try {
+
+//         const data =
+//             await userService.getUsers( req.user._id
+// );
+
+//         return res.status(200).json({
+
+//             status: true,
+
+//             data
+
+//         });
+
+//     }
+
+//     catch (err) {
+
+//         return res.status(500).json({
+
+//             status: false,
+
+//             message: err.message
+
+//         });
+
+//     }
+
+// };
+
 exports.getUsers = async (
     req,
     res
@@ -127,9 +162,79 @@ exports.getUsers = async (
 
     try {
 
+        const permissions =
+            req.user.permissions || [];
+
+        let filter = {};
+
+
+
+        // ALL USERS
+        if (
+            permissions.includes(
+                "all_user"
+            )
+        ) {
+
+            filter = {};
+
+        }
+
+
+
+        // MY USERS
+        else if (
+            permissions.includes(
+                "my_user"
+            )
+        ) {
+
+            filter = {
+
+                createdBy:
+                    req.user._id
+
+            };
+
+        }
+
+
+
+        // OWN PROFILE
+        else if (
+            permissions.includes(
+                "own_profile"
+            )
+        ) {
+
+            filter = {
+
+                _id:
+                    req.user._id
+
+            };
+
+        }
+
+
+
+        else {
+
+            return res.status(403).json({
+
+                status: false,
+
+                message:
+                    "Permission denied"
+
+            });
+
+        }
+
         const data =
-            await userService.getUsers( req.user._id
-);
+            await userService.getUsers(
+                filter
+            );
 
         return res.status(200).json({
 
@@ -154,8 +259,6 @@ exports.getUsers = async (
     }
 
 };
-
-
 // Single User
 exports.getUserById = async (
     req,
